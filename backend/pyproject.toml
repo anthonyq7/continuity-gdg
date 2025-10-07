@@ -8,3 +8,20 @@ dependencies = [
     "fastapi[standard]>=0.117.1",
     "pydantic>=2.11.9",
 ]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6",
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 127
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "C90"]
+fixable = ["ALL"]
