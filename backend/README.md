@@ -22,5 +22,17 @@ The server will start on http://localhost:8000
 ## API Endpoints
 
 - `GET /` - Health check
-- `POST /chat` - Chat with OpenAI (expects `{"message": "your message"}`)
+- `POST /chat/` - Chat with OpenAI (expects `{"message": "your message"}`)
+
+## Project Structure
+
+```
+backend/
+  main.py
+  chatbot/
+    __init__.py
+    routes.py      # FastAPI routes for chat endpoints
+    schemas.py     # Pydantic models for request/response
+    service.py     # OpenAI integration and business logic
+```
 
