@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { LayoutDashboard,   FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User } from 'lucide-react';
-
+import Link from "next/link";
 
 export default function Home() {
     const [activeItem, setActiveItem] = useState('Overview');
@@ -15,7 +15,7 @@ export default function Home() {
   ];
 
   return(
-      <div className="h-screen w-screen" style={{ backgroundColor: "#F6E8E8"}}>
+      <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff"}}>
           <div className="flex h-screen">
               <div className="flex flex-col border-r h-screen">
 
@@ -44,7 +44,7 @@ export default function Home() {
                     </ul>
                 </nav>
                 </div>
-        <div className="overflow-y-auto w-full" style={{ fontFamily: "DM Sans" }}>
+        <div className="overflow-y-auto w-full page-transition" style={{ fontFamily: "DM Sans" }}>
             <div>
                 <h1 className="text-red-800 pt-5 px-5 ">Overview</h1>
             </div>

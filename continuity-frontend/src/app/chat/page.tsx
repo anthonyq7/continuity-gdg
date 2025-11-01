@@ -15,7 +15,7 @@ export default function Chat() {
   ];
 
   return(
-      <div className="h-screen w-screen"  style={{ backgroundColor: "#F6E8E8"}}>
+      <div className="h-screen w-screen"  style={{ backgroundColor: "#ffffffff"}}>
           <div className="flex h-screen">
               <div className="flex flex-col border-r h-screen">
 
@@ -44,16 +44,24 @@ export default function Chat() {
                     </ul>
                 </nav>
                 </div>
-            <div className="flex overflow-y-auto w-full" style={{ fontFamily: "DM Sans" }}>
-              <div>
-                  <h1 className="text-red-800 pt-5 px-5 ">ShowMedia.AI</h1>
+            <div className="flex justify-between w-full" style={{ fontFamily: "DM Sans" }}>
+              <div className='w-30'>
+                  <h1 className="text-red-800 pt-5 pl-5">ShowMedia.AI</h1>
               </div>
-              <div className="flex flex-1 p-5 justify-center flex-wrap overflow-y-auto transition-all duration-500 ease-in-out">  
-                  <div className="fixed bottom-6 text-black px-5 pt-5 flex-1">
-                          <div className="bg-white w-[50vw] h-[80px] rounded-md text-gray-500 shadow-lg flex-shrink-0">
-                            <input placeholder="Ask Chatbot Anything" className="p-5 w-[50vw] py-2 h-[80px] focus:outline-none border border-gray-300 rounded-md flex-shrink-0" />
+              <div className="flex flex-col justify-center transition-all duration-500 ease-in-out">  
+                  <div className="h-[85vh] py-5">
+                    <p></p>
+                  </div>
+                  <div className="text-black px-5 pt-5 flex-1">
+                          <div className="bg-white fixed-bottom flex w-[50vw] h-[75px] hover:scale-[1.01] rounded-md text-gray-500 shadow-lg transition-all ease-in-out duration-300">
+                            <div className="py-10 px-2 flex items-center bg-white border border-gray-300 rounded-md flex-shrink-0">
+                            <input placeholder="Ask Chatbot Anything" className="p-5 w-[50vw] py-2 h-[80px] focus:outline-none" />
+                            <button className="hover:scale-[0.96] pr-5 hover:text-gray-600 hover:cursor-pointer duration-300">Submit</button>
+                            </div>
                           </div>
                   </div>
+              </div>
+              <div className="w-30">
               </div>
             </div>
         </div>
