@@ -1,29 +1,31 @@
 "use client";
 import { useState } from 'react';
 import Image from "next/image";
-import { LayoutDashboard,   FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User } from 'lucide-react';
-import Link from "next/link"; 
+import { LayoutDashboard,   FileText, MessageSquare, MoreHorizontal, Search, Bell, User, HandCoins, CalendarDays } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
+import {NavBar} from '@/app/components/navbar';
 
 export default function Home() {
     const [activeItem, setActiveItem] = useState('Overview');
-
+    const navItems = [
+        { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+        { href: "/documents", icon: FileText, label: "Documents" },
+        { href: "/chat", icon: MessageSquare, label: "Chat" },
+        { href: "/calendar", icon: CalendarDays, label: "Calendar" },
+        { href: "/payroll", icon: HandCoins, label: "Payroll" },
+        ];
   return(
       <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff"}}>
           <div className="flex w-screen">
               <div className="flex flex-col border-r w-60 h-screen p-3">
                 <nav className="bg-white" style={{ fontFamily: "DM Sans" }}>
-                    <ul className="text-gray-700 flex flex-col gap-1">
-                        <Image src={smslogo} alt="logo" className="w-55 h-auto mb-2"/>
-                        <Link href="/dashboard" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><LayoutDashboard/>Dashboard</Link>
-                        <Link href="/documents" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><FileText/>Documents</Link>
-                        <Link href="/chat" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><MessageSquare/>Chat</Link>
-                        <Link href="" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><MoreHorizontal/>More</Link>
-
-                    </ul>
+                    <Image src={smslogo} alt="logo" className="w-55 h-auto mb-2"/>
+                    {navItems.map((item) => (
+                        <NavBar key={item.href} {...item}/>
+                    ))}
                 </nav>
             </div>
-                <div className="overflow-y-auto w-full page-transition" style={{ fontFamily: "DM Sans" }}>
+            <div className="overflow-y-auto w-full appear" style={{ fontFamily: "DM Sans" }}>
             <div>
                 <h1 className="text-red-800 pt-5 px-5 ">Overview</h1>
             </div>

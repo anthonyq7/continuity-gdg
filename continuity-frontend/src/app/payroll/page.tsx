@@ -27,7 +27,7 @@ export default function Documents() {
             </div>
             <div className="overflow-y-auto w-full appear" style={{ fontFamily: "DM Sans" }}>
             <div>
-                <h1 className="text-red-800 pt-5 px-5 ">Documents</h1>
+                <h1 className="text-red-800 pt-5 px-5 ">Payroll</h1>
             </div>
             <div className="flex flex-1 p-5 flex-wrap transition-all duration-500 ease-in-out">  
                 

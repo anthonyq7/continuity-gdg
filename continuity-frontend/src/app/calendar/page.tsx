@@ -1,11 +1,11 @@
 "use client";
 import { useState } from 'react';
 import Image from "next/image";
-import { LayoutDashboard,   FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User, HandCoins, CalendarDays } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, MessageSquare, HandCoins, MoreHorizontal, Search, Bell, User, CalendarDays } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
 import {NavBar} from '@/app/components/navbar';
 
-export default function Documents() {
+export default function Calendar() {
     const [activeItem, setActiveItem] = useState('Overview');
     const navItems = [
         { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -27,7 +27,7 @@ export default function Documents() {
             </div>
             <div className="overflow-y-auto w-full appear" style={{ fontFamily: "DM Sans" }}>
             <div>
-                <h1 className="text-red-800 pt-5 px-5 ">Documents</h1>
+                <h1 className="text-red-800 pt-5 px-5 ">Calendar</h1>
             </div>
             <div className="flex flex-1 p-5 flex-wrap transition-all duration-500 ease-in-out">  
                 

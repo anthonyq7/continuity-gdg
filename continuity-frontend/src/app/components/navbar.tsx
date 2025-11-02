@@ -1,12 +1,19 @@
+'use client';
+
 import Link from 'next/link';
+import {LucideIcon} from 'lucide-react';
 
-const Navbar = () => {
-    return(
-        <nav className="flex-1 p-4 bg-white" style={{ fontFamily: "DM Sans" }}>
-        <div>
-            
-        </div>
-        </nav>  
-    );
+interface NavBarProps {
+    href: string;
+    icon: LucideIcon;
+    label: string;
+}
 
+export function NavBar({ href, icon: Icon, label }: NavBarProps) {
+  return (
+    <Link href={href} className="flex items-center gap-3 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md">
+      <Icon className="w-5 h-5" />
+      <span>{label}</span>
+    </Link>
+  );
 }
