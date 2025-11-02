@@ -1,46 +1,22 @@
 "use client";
 import { useState } from 'react';
+import Image from "next/image";
 import { LayoutDashboard,   FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User } from 'lucide-react';
-
+import Link from "next/link"; 
+import smslogo from "@/assets/widelogo.png";
 
 export default function Chat() {
-    const [activeItem, setActiveItem] = useState('Overview');
-
-  const navItems = [
-    { name: 'Overview', icon: LayoutDashboard },
-    { name: 'Documents', icon: FileText },
-    { name: 'Crew', icon: Users },
-    { name: 'Chat', icon: MessageSquare },
-    { name: 'More', icon: MoreHorizontal }
-  ];
-
   return(
       <div className="h-screen w-screen"  style={{ backgroundColor: "#ffffffff"}}>
           <div className="flex h-screen">
-              <div className="flex flex-col border-r h-screen">
-
-                {/* Nav */}
-                <nav className="flex-1 p-4 bg-white" style={{ fontFamily: "DM Sans" }}>
-                    <ul className="space-y-1 text-gray-700">
-                    {navItems.map((item) => {
-                        const Icon = item.icon;
-                        const isActive = activeItem === item.name;
-                        return (
-                        <li key={item.name}>
-                            <button
-                            onClick={() => setActiveItem(item.name)}
-                            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-sm text-sm font-medium transition-colors ${
-                                isActive
-                                ? 'bg-gray-300'
-                                : 'hover:bg-gray-50'
-                            }`}
-                            >
-                            <Icon size={20} />
-                            <span>{item.name}</span>
-                            </button>
-                        </li>
-                        );
-                    })}
+              <div className="flex flex-col border-r w-60 h-screen p-3">
+                <nav className="bg-white" style={{ fontFamily: "DM Sans" }}>
+                    <ul className="text-gray-700 flex flex-col gap-1">
+                        <Image src={smslogo} alt="logo" className="w-55 h-auto mb-2"/>
+                        <Link href="/dashboard" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><LayoutDashboard/>Dashboard</Link>
+                        <Link href="/documents" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><FileText/>Documents</Link>
+                        <Link href="/chat" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><MessageSquare/>Chat</Link>
+                        <Link href="" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><MoreHorizontal/>More</Link>
                     </ul>
                 </nav>
                 </div>

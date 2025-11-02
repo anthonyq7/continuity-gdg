@@ -1,78 +1,58 @@
 "use client";
 import { useState } from 'react';
+import Image from "next/image";
 import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User, X, Send } from 'lucide-react';
 import Link from "next/link";
+import smslogo from "@/assets/widelogo.png";
 
 export default function Home() {
     const [activeItem, setActiveItem] = useState('Overview');
     const [isOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState('');
 
-    const navItems = [
-        { name: 'Overview', icon: LayoutDashboard },
-        { name: 'Documents', icon: FileText },
-        { name: 'Crew', icon: Users },
-        { name: 'Chat', icon: MessageSquare },
-        { name: 'More', icon: MoreHorizontal }
-    ];
-
     return (
-        <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff" }}>
-            <div className="flex h-screen">
-                <div className="flex flex-col border-r h-screen">
-
-                    {/* Nav */}
-                    <nav className="flex-1 p-4 bg-white" style={{ fontFamily: "DM Sans" }}>
-                        <ul className="space-y-1 text-gray-700">
-                            {navItems.map((item) => {
-                                const Icon = item.icon;
-                                const isActive = activeItem === item.name;
-                                return (
-                                    <li key={item.name}>
-                                        <button
-                                            onClick={() => setActiveItem(item.name)}
-                                            className={`w-full flex items-center space-x-3 px-3 py-2.5 text-sm font-medium transition-colors ${isActive
-                                                ? 'bg-gray-300'
-                                                : 'hover:bg-gray-50'
-                                                }`}
-                                        >
-                                            <Icon size={20} />
-                                            <span>{item.name}</span>
-                                        </button>
-                                    </li>
-                                );
-                            })}
+        <div className="min-h-screen w-screen" style={{ backgroundColor: "#ffffffff" }}>
+            <div className="flex">
+                <div className="flex flex-col border-r w-60 min-h-screen p-3 sticky top-0">
+                    <nav className="bg-white" style={{ fontFamily: "DM Sans" }}>
+                        <ul className="text-gray-700 flex flex-col gap-1">
+                            <Image src={smslogo} alt="logo" className="w-55 h-auto mb-2" />
+                            <Link href="/dashboard" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><LayoutDashboard />Dashboard</Link>
+                            <Link href="/documents" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><FileText />Documents</Link>
+                            <Link href="/chat" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><MessageSquare />Chat</Link>
+                            <Link href="" className="flex gap-5 hover:bg-gray-200 p-4 pr-7 duration-300 rounded-md"><MoreHorizontal />More</Link>
                         </ul>
                     </nav>
                 </div>
-                <div className="overflow-y-auto w-full page-transition" style={{ fontFamily: "DM Sans" }}>
+                <div className="flex-1 w-full page-transition" style={{ fontFamily: "DM Sans" }}>
                     <div>
-                        <h1 className="text-red-800 pt-5 px-5" style={{ color: "#ea4b33" }}>Overview</h1>
+                        <h1 className="pt-5 px-5" style={{ color: "#ea4b33" }}>Overview</h1>
                     </div>
                     <div className="flex flex-1 p-5 flex-wrap transition-all duration-500 ease-in-out">
                         <div className="text-black px-5 min-w-[400px] flex-1">
-                            <div className="min-w-[350] bg-red-800 mb-5 p-6 text-white shadow-lg transition-all duration-300 delay-150 flex-shrink-0" style={{ backgroundColor: "#ea4b33" }}>
+                            <div className="min-w-[350] mb-5 p-6 text-white shadow-lg transition-all duration-300 delay-150 flex-shrink-0" style={{ backgroundColor: "#ea4b33" }}>
                                 <h1 className="text-white font-bold text-4xl mb-2" style={{ fontFamily: "DM Sans" }}>My Dashboard</h1>
                                 <p className="text-md text-white" style={{ fontFamily: "DM Sans" }}>Manage all activities here</p>
                             </div>
-                            <div className="min-w-[350] h-[600] bg-white p-8 text-white shadow-lg transition-all duration-300 delay-150 flex-shrink-0">
+                            <div className="min-w-[350] h-[600px] bg-white p-8 text-white shadow-lg transition-all duration-300 delay-150 flex-shrink-0">
                                 <p className="text-black p-6" style={{ fontFamily: "DM Sans" }}></p>
                             </div>
                         </div>
-                        <div className="text-black px-5 min-w-[400px] flex-1">
+                        <div className="text-black px-5 h-[200px] min-w-[400px] flex-1">
                             <div className="h-100 min-w-[400px] bg-white mb-5 p-8 text-white shadow-lg">
                                 <h1 className="text-white text-4xl mb-2" style={{ fontFamily: "DM Sans" }}></h1>
                             </div>
-                            <div className="h-100 min-w-[400px] bg-white mb-5 p-8 text-white shadow-lg">
+                            <div className="h-100 h-[200px] min-w-[400px] bg-white mb-5 p-8 text-white shadow-lg">
                                 <h1 className="text-white text-4xl mb-2" style={{ fontFamily: "DM Sans" }}></h1>
                             </div>
-                            <div className="h-100 min-w-[400px] bg-white mb-5 text-white shadow-lg">
+                            <div className="h-100 h-[200px] min-w-[400px] bg-white mb-5d p-8 text-white shadow-lg">
                                 <h1 className="text-white text-4xl mb-2" style={{ fontFamily: "DM Sans" }}></h1>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             {/* Chat Button */}
             {!isOpen && (
                 <button
@@ -80,7 +60,7 @@ export default function Home() {
                     className="fixed bottom-6 right-6 text-white p-4 rounded-full shadow-lg transition-all z-[9999]"
                     style={{ backgroundColor: "#ea4b33" }}
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#b34836"}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#cd5540"}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#ea4b33"}
                 >
                     <MessageSquare size={24} />
                 </button>
@@ -93,7 +73,7 @@ export default function Home() {
                     style={{ fontFamily: "DM Sans", height: "500px" }}
                 >
                     {/* Header */}
-                    <div className="flex items-center justify-between p-4 border-b bg-red-800" style={{ backgroundColor: "#ea4b33" }}>
+                    <div className="flex items-center justify-between p-4 border-b" style={{ backgroundColor: "#ea4b33" }}>
                         <h3 className="text-lg font-bold text-white">Chat</h3>
                         <button
                             onClick={() => setIsOpen(false)}
@@ -118,9 +98,15 @@ export default function Home() {
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 placeholder="Type a message..."
-                                className="flex-1 px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-red-800 text-gray-800"
+                                className="flex-1 px-3 py-2 border focus:outline-none focus:ring-2 text-gray-800"
+                                style={{ outlineColor: "#ea4b33" }}
                             />
-                            <button className="bg-red-800 text-white p-2 hover:bg-red-900 transition-colors">
+                            <button
+                                className="text-white p-2 transition-colors"
+                                style={{ backgroundColor: "#ea4b33" }}
+                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#b34836"}
+                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#ea4b33"}
+                            >
                                 <Send size={20} />
                             </button>
                         </div>
