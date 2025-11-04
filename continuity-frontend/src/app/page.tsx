@@ -18,7 +18,7 @@ export default function Home() {
         </div>
         <div>
         <p className="text-xs text-red-400 mt-5 hover:text-red-800 duration-100 hover:cursor-pointer" >Forgot password?</p>
-        <Link href="/documents" className="rounded-sm flex justify-center min-w-[400px] items-center text-white h-12 bg-red-400 hover:bg-red-500 mt-5 mb-10 font-bold transition-transform duration-300 hover:scale-[1.01]" >Sign in</Link>
+        <Link href="/dashboard_new" className="rounded-sm flex justify-center min-w-[400px] items-center text-white h-12 bg-red-400 hover:bg-red-500 mt-5 mb-10 font-bold transition-transform duration-300 hover:scale-[1.01]" >Sign in</Link>
         <div className="flex justify-between w-[30vw] min-w-[400px] items-center">
           <hr className="border-t-[0.5px] border-white w-[40%]"></hr>
           <p className="text-xs text-white">OR</p>
