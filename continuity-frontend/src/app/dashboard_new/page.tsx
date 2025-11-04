@@ -33,13 +33,21 @@ export default function Home() {
                     </nav>
                 </aside>
                 <div className="flex-1 w-full appear overflow-y-auto" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-                    <div>
-                        <h1 className="pt-5 px-10 font-bold" style={{ color: "#ea4b33" }}>Overview</h1>
+                    <div className="flex items-center p-5 justify-between gap-4">
+                        <h1 className="font-bold" style={{ color: "#ea4b33" }}>Overview</h1>
+                        <div className="flex items-center gap-4">
+                            <div className="flex border-1 h-10 border-gray-300">
+                                <input className="p-2 w-30 lg:w-50 duration-300 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500" placeholder="Search"/>
+                                <button className="bg-gray-100 hover:bg-gray-300 p-2 duration-100"><Search/></button>
+                                <button></button>
+                            </div>
+                            <User className="h-10 w-10 p-2 bg-gray-500 rounded-full"/>
+                        </div>
                     </div>
                     <div className="flex flex-1 p-5 flex-wrap transition-all duration-500 ease-in-out">
                         <div className="text-black px-5 min-w-[400px] flex-1">
                             <div className="min-w-[350] mb-5 p-6 text-white shadow-lg transition-all duration-300 delay-150 flex-shrink-0" style={{ backgroundColor: "#ea4b33" }}>
-                                <h1 className="text-white font-bold text-4xl mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>MY DASHBOARD</h1>
+                                <h1 className="text-white font-bold text-4xl mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto' }}>MY DASHBOARD</h1>
                                 <p className="text-md text-white" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>Manage all activities here</p>
                             </div>
                             <div className="min-w-[350] h-[770px] bg-white p-8 text-white shadow-lg transition-all duration-300 delay-150 flex-shrink-0">
