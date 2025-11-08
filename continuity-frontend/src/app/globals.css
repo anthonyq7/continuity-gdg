@@ -14,6 +14,10 @@
   }
 }
 
+input:focus {
+  outline: none;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -43,4 +47,14 @@ body {
   to {
     transform: translateY(0);
   }
+}
+
+.round {
+  border-radius: 10;
+  border: 0.2px solid;
+  border-color: #e3e3e3;
+}
+
+.roundsearch {
+  border-radius: 10;
 }

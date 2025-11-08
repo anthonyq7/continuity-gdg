@@ -18,10 +18,9 @@ export default function Chat() {
             <div className="flex h-screen">
                 <aside className="flex flex-col border-r w-60 shrink-0 p-3">
                     <nav
-                        className="bg-white"
+                        className="bg-white text-black"
                         style={{
-                            fontFamily:
-                                '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+                            fontFamily: "'Montserrat', sans-serif"
                         }}
                     >
                         <Image src={smslogo} alt="logo" className="w-56 h-auto mb-2" />
@@ -30,9 +29,9 @@ export default function Chat() {
                         ))}
                     </nav>
                 </aside>
-                <div className="flex justify-between w-full appear" style={{ fontFamily: "DM Sans" }}>
+                <div className="flex justify-between w-full " style={{ fontFamily: "DM Sans", backgroundColor: "#fafafaff"}}>
                     <div className='w-30'>
-                        <h1 className="pt-5 pl-5 font-bold" style={{ color: "#ea4b33" }}>ShowMedia.AI</h1>
+                        <h1 className="pt-5 pl-5 font-bold text-gray-900">ShowMedia.AI</h1>
                     </div>
                     <div className="flex flex-col justify-center transition-all duration-500 ease-in-out">
                         <div className="h-[85vh] py-5">

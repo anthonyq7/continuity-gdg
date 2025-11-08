@@ -8,7 +8,7 @@ import googlelogo from "@/assets/googlelogo.png"
 export default function Home() {
 
   return (
-    <div className="w-screen h-screen flex" style={{ backgroundColor: "#000000"}}>
+    <div className="w-screen h-screen flex" style={{ backgroundColor: "#000000", fontFamily: "'Montserrat', sans-serif" }}>
       <div className="h-full flex flex-col mx-auto page-transition justify-center items-center">
         <Image className="w-auto h-[125px]" src={logo} alt="logo"/>
         <div className="flex flex-col mx-auto justify-center items-center">   
