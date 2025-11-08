@@ -4,7 +4,7 @@ import Image from "next/image";
 import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User, HandCoins, CalendarDays, X, Send } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
 import { NavBar } from '@/app/components/navbar';
-import {UserDropdown} from '@/app/icondrop/icon'
+import {UserDropdown} from '@/app/icondrop/UserDropdown'
 
 
 export default function Home() {
