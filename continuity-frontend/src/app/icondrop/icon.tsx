@@ -1,3 +1,4 @@
+"use client";
 import { useState, useRef, useEffect } from 'react';
 import { User, LogOut} from 'lucide-react'; 
 import Link from 'next/link';
