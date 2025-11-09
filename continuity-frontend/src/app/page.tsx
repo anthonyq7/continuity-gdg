@@ -18,16 +18,7 @@ export default function Home() {
         </div>
         <div>
         <p className="text-xs text-red-400 mt-5 hover:text-red-800 duration-100 hover:cursor-pointer" >Forgot password?</p>
-        <Link href="/dashboard_new" className="rounded-sm flex justify-center min-w-[400px] items-center text-white h-12 bg-red-400 hover:bg-red-500 mt-5 mb-10 font-bold transition-transform duration-300 hover:scale-[1.01]" >Sign in</Link>
-        <div className="flex justify-between w-[30vw] min-w-[400px] items-center">
-          <hr className="border-t-[0.5px] border-white w-[40%]"></hr>
-          <p className="text-xs text-white">OR</p>
-          <hr className="border-t-[0.5px] border-white w-[40%]"></hr>
-        </div>
-            <div className="flex items-center justify-center rounded-sm text-white w-[30vw] h-12 min-w-[400px] bg-gray-900 mt-10 mb-10 hover:bg-gray-700 font-bold hover:scale-[1.01] transition-transform duration-300">
-            <Image src={googlelogo} alt="googlelogo" className="h-5 mr-3 w-auto"/>
-            <button className="" >Continue with Google</button>
-            </div>
+        <Link href="/dashboard" className="rounded-sm flex justify-center min-w-[400px] items-center text-white h-12 bg-red-400 hover:bg-red-500 mt-5 mb-10 font-bold transition-transform duration-300 hover:scale-[1.01]" >Sign in</Link>
         </div>
       </div>
     </div>
