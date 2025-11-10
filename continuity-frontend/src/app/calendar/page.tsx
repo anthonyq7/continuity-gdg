@@ -1,39 +1,198 @@
 "use client";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image from "next/image";
-import { LayoutDashboard, FileText, Users, MessageSquare, HandCoins, MoreHorizontal, Search, Bell, User, CalendarDays } from 'lucide-react';
+import Link from "next/link";
+import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User, HandCoins, CalendarDays, X, Send, ChevronLeft, ChevronRight } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
-import {NavBar} from '@/app/components/navbar';
+import { NavBar } from '@/app/components/navbar';
+import { UserDropdown } from '@/app/icondrop/UserDropdown'
 
-export default function Calendar() {
+
+export default function Home() {
     const [activeItem, setActiveItem] = useState('Overview');
-    const navItems = [
-        { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-        { href: "/documents", icon: FileText, label: "Documents" },
-        { href: "/chat", icon: MessageSquare, label: "Chat" },
-        { href: "/calendar", icon: CalendarDays, label: "Calendar" },
-        { href: "/payroll", icon: HandCoins, label: "Payroll" },
-        ];
-    return(
-      <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff"}}>
-          <div className="flex w-screen">
-              <div className="flex flex-col border-r w-60 h-screen p-3">
-                <nav className="bg-white" style={{ fontFamily: "DM Sans" }}>
-                    <Image src={smslogo} alt="logo" className="w-55 h-auto mb-2"/>
-                    {navItems.map((item) => (
-                        <NavBar key={item.href} {...item}/>
-                    ))}
-                </nav>
+    const [isOpen, setIsOpen] = useState(false);
+    const [message, setMessage] = useState('');
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    // Sample events
+    const [events] = useState([
+        { date: '2025-11-15', title: 'Team Meeting', time: '10:00 AM' },
+        { date: '2025-11-18', title: 'Project Deadline', time: '5:00 PM' },
+        { date: '2025-11-22', title: 'Client Presentation', time: '2:00 PM' },
+        { date: '2025-11-25', title: 'Training Session', time: '9:00 AM' },
+    ]);
+
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    
+    const getDaysInMonth = (date: Date) => {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startingDayOfWeek = firstDay.getDay();
+        
+        return { daysInMonth, startingDayOfWeek, year, month };
+    };
+
+    const { daysInMonth, startingDayOfWeek, year, month } = getDaysInMonth(currentDate);
+
+    const previousMonth = () => {
+        setCurrentDate(new Date(year, month - 1, 1));
+    };
+
+    const nextMonth = () => {
+        setCurrentDate(new Date(year, month + 1, 1));
+    };
+
+    const getEventsForDate = (day: number) => {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        return events.filter(event => event.date === dateStr);
+    };
+
+    const isToday = (day: number) => {
+        const today = new Date();
+        return today.getDate() === day && 
+               today.getMonth() === month && 
+               today.getFullYear() === year;
+    };
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+
+    return (
+        <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
+            <div className="flex h-screen">
+                <div className="flex-1 w-full overflow-y-auto">
+                    <div className="flex items-center p-2 justify-between gap-4 border-b-[0.5] h-15">
+                        <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
+                        <div className="flex items-center gap-5">
+                            <div className="flex md:border-1 h-10 roundsearch md:border-gray-300 transition-all duration-300 w-[0px] md:w-40 lg:w-60">
+                                <input className="text-gray-700 p-3 lg:w-50 transition-all roundsearch w-[0px] md:w-30 duration-300 md:focus:outline-none md:focus:ring-1 md:focus:ring-orange-500 md:focus:border-orange-500" placeholder="Search" />
+                                <button className="hover:bg-gray-300 flex justify-center items-center w-[0px] md:w-10 duration-300 roundsearch hover:cursor-pointer"><Search /></button>
+                            </div>
+                            <Link href="/dashboard" className="hover:text-gray-600 transition-colors cursor-pointer">
+                                DashBoard
+                            </Link>
+                            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
+                                <p>HubSpot</p>
+                            </a>
+                            <p>Resources</p>
+                            <UserDropdown />
+                        </div>
+                    </div>
+
+                    {/* Calendar Content */}
+                    <div className="p-8" style={{ backgroundColor: "#fafafaff" }}>
+                        <div className="max-w-7xl mx-auto">
+                            <div className="flex gap-6">
+                                {/* LEFT SIDE - Upcoming Events */}
+                                <div className="w-80 flex-shrink-0">
+                                    <div className="bg-white shadow-sm p-6 sticky top-8">
+                                        <h2 className="text-2xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
+                                        <div className="space-y-3">
+                                            {events.map((event, idx) => (
+                                                <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+                                                    <div className="flex flex-col items-center justify-center px-3 py-2 min-w-[60px]" style={{ backgroundColor: '#e35540' }}>
+                                                        <span className="text-white text-xs font-semibold">
+                                                            {new Date(event.date).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
+                                                        </span>
+                                                        <span className="text-white text-xl font-bold">
+                                                            {new Date(event.date).getDate()}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <h3 className="text-gray-900 font-semibold text-sm">{event.title}</h3>
+                                                        <p className="text-gray-600 text-xs">{event.time}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* RIGHT SIDE - Calendar */}
+                                <div className="flex-1">
+                                    <div className="bg-white shadow-sm p-6">
+                                        <div className="flex items-center justify-between mb-6">
+                                            <h1 className="text-3xl font-bold text-gray-900">
+                                                {monthNames[month]} {year}
+                                            </h1>
+                                            <div className="flex gap-2">
+                                                <button 
+                                                    onClick={previousMonth}
+                                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                                >
+                                                    <ChevronLeft className="text-gray-600" />
+                                                </button>
+                                                <button 
+                                                    onClick={nextMonth}
+                                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                                >
+                                                    <ChevronRight className="text-gray-600" />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Days of Week Header */}
+                                        <div className="grid grid-cols-7 gap-2 mb-2">
+                                            {daysOfWeek.map(day => (
+                                                <div key={day} className="text-center font-semibold text-gray-600 py-2">
+                                                    {day}
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Calendar Grid */}
+                                        <div className="grid grid-cols-7 gap-2">
+                                            {/* Empty cells for days before month starts */}
+                                            {Array.from({ length: startingDayOfWeek }).map((_, index) => (
+                                                <div key={`empty-${index}`} className="aspect-square p-2"></div>
+                                            ))}
+                                            
+                                            {/* Days of the month */}
+                                            {Array.from({ length: daysInMonth }).map((_, index) => {
+                                                const day = index + 1;
+                                                const dayEvents = getEventsForDate(day);
+                                                const today = isToday(day);
+                                                
+                                                return (
+                                                    <div 
+                                                        key={day} 
+                                                        className={`aspect-square p-2 border hover:bg-gray-50 transition-colors cursor-pointer ${
+                                                            today ? 'border-2' : 'border-gray-200'
+                                                        }`}
+                                                        style={today ? { borderColor: '#e35540' } : {}}
+                                                    >
+                                                        <div className={`text-sm font-semibold mb-1 ${
+                                                            today ? 'text-white rounded-full w-6 h-6 flex items-center justify-center' : 'text-gray-700'
+                                                        }`}
+                                                        style={today ? { backgroundColor: '#e35540' } : {}}
+                                                        >
+                                                            {day}
+                                                        </div>
+                                                        <div className="space-y-1">
+                                                            {dayEvents.map((event, idx) => (
+                                                                <div 
+                                                                    key={idx} 
+                                                                    className="text-xs p-1 rounded text-white truncate"
+                                                                    style={{ backgroundColor: '#e35540' }}
+                                                                >
+                                                                    {event.title}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="overflow-y-auto w-full appear" style={{ fontFamily: "DM Sans" }}>
-            <div>
-                <h1 className="text-red-800 pt-5 px-5 ">Calendar</h1>
-            </div>
-            <div className="flex flex-1 p-5 flex-wrap transition-all duration-500 ease-in-out">  
-                
-            </div>
-            </div>
-        </div>
         </div>
     )
 }
