@@ -14,7 +14,7 @@ export default function Home() {
     const [message, setMessage] = useState('');
     const [currentDate, setCurrentDate] = useState(new Date());
 
-    // Sample events
+    // Sample events - Using November 2025 dates
     const [events] = useState([
         { date: '2025-11-15', title: 'Team Meeting', time: '10:00 AM' },
         { date: '2025-11-18', title: 'Project Deadline', time: '5:00 PM' },
@@ -43,6 +43,10 @@ export default function Home() {
 
     const nextMonth = () => {
         setCurrentDate(new Date(year, month + 1, 1));
+    };
+
+    const goToToday = () => {
+        setCurrentDate(new Date());
     };
 
     const getEventsForDate = (day: number) => {
@@ -91,22 +95,28 @@ export default function Home() {
                                     <div className="bg-white shadow-sm p-6 sticky top-8">
                                         <h2 className="text-2xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
                                         <div className="space-y-3">
-                                            {events.map((event, idx) => (
-                                                <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-colors">
-                                                    <div className="flex flex-col items-center justify-center px-3 py-2 min-w-[60px]" style={{ backgroundColor: '#e35540' }}>
-                                                        <span className="text-white text-xs font-semibold">
-                                                            {new Date(event.date).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
-                                                        </span>
-                                                        <span className="text-white text-xl font-bold">
-                                                            {new Date(event.date).getDate()}
-                                                        </span>
+                                            {events.map((event, idx) => {
+                                                // Parse date correctly to avoid timezone issues
+                                                const [eventYear, eventMonth, eventDay] = event.date.split('-').map(Number);
+                                                const eventDate = new Date(eventYear, eventMonth - 1, eventDay);
+                                                
+                                                return (
+                                                    <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+                                                        <div className="flex flex-col items-center justify-center px-3 py-2 min-w-[60px]" style={{ backgroundColor: '#e35540' }}>
+                                                            <span className="text-white text-xs font-semibold">
+                                                                {eventDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
+                                                            </span>
+                                                            <span className="text-white text-xl font-bold">
+                                                                {eventDate.getDate()}
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex-1">
+                                                            <h3 className="text-gray-900 font-semibold text-sm">{event.title}</h3>
+                                                            <p className="text-gray-600 text-xs">{event.time}</p>
+                                                        </div>
                                                     </div>
-                                                    <div className="flex-1">
-                                                        <h3 className="text-gray-900 font-semibold text-sm">{event.title}</h3>
-                                                        <p className="text-gray-600 text-xs">{event.time}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 </div>
@@ -124,6 +134,13 @@ export default function Home() {
                                                     className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                                                 >
                                                     <ChevronLeft className="text-gray-600" />
+                                                </button>
+                                                <button 
+                                                    onClick={goToToday}
+                                                    className="px-4 py-2 text-sm font-semibold text-white rounded-lg hover:opacity-90 transition-opacity"
+                                                    style={{ backgroundColor: '#e35540' }}
+                                                >
+                                                    Today
                                                 </button>
                                                 <button 
                                                     onClick={nextMonth}

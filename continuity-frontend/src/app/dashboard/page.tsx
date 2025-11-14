@@ -85,7 +85,7 @@ export default function Home() {
                                 <h1 className="text-white font-bold text-4xl mb-2">MY DASHBOARD</h1>
                                 <p className="text-md text-white">Manage all activities here</p>
                             </div>
-                            <div className="min-w-[350px] min-h-[770px] rounded bg-white p-8 text-white transition-all duration-300 delay-150 flex-shrink-0">
+                            <div className="min-w-[350px] min-h-[765px] rounded bg-white p-8 text-white transition-all duration-300 delay-150 flex-shrink-0">
                                 <h1 className="text-gray-900 text-2xl font-bold mb-4">
                                     Payroll
                                 </h1>
@@ -170,13 +170,13 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="h-[365px] min-w-[400px] bg-white mb-5 p-8 text-white round overflow-hidden">
-                                <h1 className="text-gray-900 text-2xl mb-4 font-bold">
+                            <div className="h-[320px] min-w-[400px] bg-white mb-5 p-8 text-white round flex flex-col">
+                                <h1 className="text-gray-900 text-2xl mb-4 font-bold flex-shrink-0">
                                     Documents
                                 </h1>
-                                <div className="grid grid-cols-2 gap-3 overflow-y-auto" style={{ maxHeight: '280px' }}>
+                                <div className="grid grid-cols-2 gap-3 overflow-y-auto flex-1 pr-2">
                                     {documents.map((doc) => (
-                                        <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors cursor-pointer">
+                                        <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors cursor-pointer h-fit">
                                             <div className="flex items-start gap-2">
                                                 <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
                                                 <div className="flex-1 min-w-0">
@@ -189,7 +189,7 @@ export default function Home() {
                                 </div>
                             </div>
 
-                            <div className="h-[320px] min-w-[400px] bg-white mb-5 p-8 flex flex-col round">
+                            <div className="h-[360px] min-w-[400px] bg-white mb-5 p-8 flex flex-col round">
                                 <h1 className="text-gray-900 text-2xl mb-5 font-bold flex-shrink-0">
                                     Upcoming Events
                                 </h1>
