@@ -76,7 +76,7 @@ export default function Home() {
                                 <button className="hover:bg-gray-300 flex justify-center items-center w-[0px] md:w-10 duration-300 roundsearch hover:cursor-pointer"><Search /></button>
                             </div>
                             <Link href="/dashboard" className="hover:text-gray-600 transition-colors cursor-pointer">
-                                DashBoard
+                                Dashboard
                             </Link>
                             <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
                                 <p>HubSpot</p>
@@ -137,7 +137,7 @@ export default function Home() {
                                                 </button>
                                                 <button 
                                                     onClick={goToToday}
-                                                    className="px-4 py-2 text-sm font-semibold text-white rounded-lg hover:opacity-90 transition-opacity"
+                                                    className="px-4 py-2 text-sm font-semibold text-white hover:opacity-90 hover:cursor-pointer transition-opacity"
                                                     style={{ backgroundColor: '#e35540' }}
                                                 >
                                                     Today
