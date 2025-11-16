@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, MessageCircle, HandCoins, History, X, Send } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, MessageCircle, EllipsisVertical, History, X, Send } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
 import { NavBar } from '@/app/components/navbar';
 import { UserDropdown } from '@/app/icondrop/UserDropdown'
@@ -61,14 +61,10 @@ export default function Home() {
         <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
             <div className="flex h-screen">
                 <div className="flex-1 w-full overflow-y-auto">
-                    <div className="flex items-center p-2 justify-between gap-4 border-b-[0.5] h-15">
+                    <div className="flex items-center p-2 gap-4 border-b-[0.5] h-15">
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
-                        <div className="flex items-center gap-5">
-                            <div className="flex md:border-1 h-10 roundsearch md:border-gray-300 transition-all duration-300 w-[0px] md:w-40 lg:w-60">
-                                <input className="text-gray-700 p-3 lg:w-50 transition-all roundsearch w-[0px] md:w-30 duration-300 md:focus:outline-none md:focus:ring-1 md:focus:ring-orange-500 md:focus:border-orange-500" placeholder="Search" />
-                                <button className="hover:bg-gray-300 flex justify-center items-center w-[0px] md:w-10 duration-300 roundsearch hover:cursor-pointer"><Search /></button>
-                                <button></button>
-                            </div>
+                        <div className="flex w-full justify-between items-center gap-5">
+                            <div className="flex gap-5">
                             <Link href="/calendar" className="hover:text-gray-600 transition-colors cursor-pointer">
                                 Calendar
                             </Link>
@@ -76,7 +72,12 @@ export default function Home() {
                                 <p>HubSpot</p>
                             </a>
                             <p>Resources</p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                            <div className="text-right"><p><b>Show Media</b></p>
+                            <p className='text-xs'>showmedia@gmail.com</p></div>
                             <UserDropdown />
+                            </div>
                         </div>
                     </div>
                     <div className="flex flex-1 p-4 appear flex-wrap transition-all duration-500 ease-in-out gap-2 pt-6" style={{ backgroundColor: "#fafafaff" }}>
@@ -85,7 +86,7 @@ export default function Home() {
                                 <h1 className="text-white font-bold text-4xl mb-2">MY DASHBOARD</h1>
                                 <p className="text-md text-white">Manage all activities here</p>
                             </div>
-                            <div className="min-w-[350px] min-h-[765px] rounded bg-white p-8 text-white transition-all duration-300 delay-150 flex-shrink-0">
+                            <div className="min-w-[350px] border-[0.5] border-gray-200 min-h-[765px] bg-white p-8 text-white transition-all duration-300 delay-150 flex-shrink-0">
                                 <h1 className="text-gray-900 text-2xl font-bold mb-4">
                                     Payroll
                                 </h1>
@@ -93,19 +94,19 @@ export default function Home() {
                                 <div className="flex gap-10 mb-6 border-b border-gray-200">
                                     <button
                                         onClick={() => setActiveTab('payment')}
-                                        className={`text-lg pb-2 transition-colors ${activeTab === 'payment' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-700 hover:text-gray-900'}`}
+                                        className={`text-lg pb-2 transition-colors ${activeTab === 'payment' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-700 hover:text-gray-900 hover:cursor-pointer'}`}
                                     >
                                         Payment
                                     </button>
                                     <button
                                         onClick={() => setActiveTab('pending')}
-                                        className={`text-lg pb-2 transition-colors ${activeTab === 'pending' ? 'text-yellow-600 border-b-2 border-yellow-600' : 'text-gray-700 hover:text-gray-900'}`}
+                                        className={`text-lg pb-2 transition-colors ${activeTab === 'pending' ? 'text-yellow-600 border-b-2 border-yellow-600' : 'text-gray-700 hover:text-gray-900 hover:cursor-pointer'}`}
                                     >
                                         Pending
                                     </button>
                                     <button
                                         onClick={() => setActiveTab('overdue')}
-                                        className={`text-lg pb-2 transition-colors ${activeTab === 'overdue' ? 'text-red-600 border-b-2 border-red-600' : 'text-gray-700 hover:text-gray-900'}`}
+                                        className={`text-lg pb-2 transition-colors ${activeTab === 'overdue' ? 'text-red-600 border-b-2 border-red-600' : 'text-gray-700 hover:text-gray-900 hover:cursor-pointer'}`}
                                     >
                                         Overdue
                                     </button>
@@ -141,7 +142,7 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="text-black px-1 min-w-[400px] flex-1">
+                        <div className="text-black px-2 min-w-[400px] flex-1">
                             <div className="h-[185px] min-w-[400px] bg-white mb-5 p-8 text-white round">
                                 <h1 className="text-gray-900 text-2xl mb-3 font-bold">
                                     Progress Check
@@ -170,18 +171,21 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="h-[320px] min-w-[400px] bg-white mb-5 p-8 text-white round flex flex-col">
+                            <div className="h-[420px] min-w-[400px] bg-white mb-5 p-8 text-white round flex flex-col">
                                 <h1 className="text-gray-900 text-2xl mb-4 font-bold flex-shrink-0">
                                     Documents
                                 </h1>
-                                <div className="grid grid-cols-2 gap-3 overflow-y-auto flex-1 pr-2">
+                                <div className="flex flex-col gap-3 overflow-y-auto flex-1 pr-2">
                                     {documents.map((doc) => (
-                                        <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors cursor-pointer h-fit">
+                                        <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors h-fit">
                                             <div className="flex items-start gap-2">
                                                 <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
-                                                <div className="flex-1 min-w-0">
-                                                    <p className="text-gray-900 text-sm font-medium truncate">{doc.name}</p>
+                                                <div className="w-full flex justify-between gap-2 min-w-0">
+                                                    <p className="text-gray-900 text-sm font-medium truncate cursor-pointer">{doc.name}</p>
+                                                    <div className="flex gap-2">
                                                     <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
+                                                    <EllipsisVertical className="text-gray-500 cursor-pointer"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

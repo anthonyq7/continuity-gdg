@@ -70,11 +70,8 @@ export default function Home() {
                 <div className="flex-1 w-full overflow-y-auto">
                     <div className="flex items-center p-2 justify-between gap-4 border-b-[0.5] h-15">
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
-                        <div className="flex items-center gap-5">
-                            <div className="flex md:border-1 h-10 roundsearch md:border-gray-300 transition-all duration-300 w-[0px] md:w-40 lg:w-60">
-                                <input className="text-gray-700 p-3 lg:w-50 transition-all roundsearch w-[0px] md:w-30 duration-300 md:focus:outline-none md:focus:ring-1 md:focus:ring-orange-500 md:focus:border-orange-500" placeholder="Search" />
-                                <button className="hover:bg-gray-300 flex justify-center items-center w-[0px] md:w-10 duration-300 roundsearch hover:cursor-pointer"><Search /></button>
-                            </div>
+                                       <div className="flex w-full justify-between items-center gap-5">
+                            <div className="flex gap-5">
                             <Link href="/dashboard" className="hover:text-gray-600 transition-colors cursor-pointer">
                                 Dashboard
                             </Link>
@@ -82,7 +79,12 @@ export default function Home() {
                                 <p>HubSpot</p>
                             </a>
                             <p>Resources</p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                            <div className="text-right"><p><b>Show Media</b></p>
+                            <p className='text-xs'>showmedia@gmail.com</p></div>
                             <UserDropdown />
+                            </div>
                         </div>
                     </div>
 
