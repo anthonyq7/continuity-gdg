@@ -91,7 +91,7 @@ export default function Home() {
                         <div className="max-w-7xl mx-auto">
                             <div className="flex gap-6">
                                 {/* LEFT SIDE - Upcoming Events */}
-                                <div className="w-80 flex-shrink-0">
+                                <div className="w-80 flex-shrink-0 appear">
                                     <div className="bg-white shadow-sm p-6 sticky top-8">
                                         <h2 className="text-2xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
                                         <div className="space-y-3">
@@ -123,7 +123,7 @@ export default function Home() {
 
                                 {/* RIGHT SIDE - Calendar */}
                                 <div className="flex-1">
-                                    <div className="bg-white shadow-sm p-6">
+                                    <div className="bg-white shadow-sm p-6 appear">
                                         <div className="flex items-center justify-between mb-6">
                                             <h1 className="text-3xl font-bold text-gray-900">
                                                 {monthNames[month]} {year}

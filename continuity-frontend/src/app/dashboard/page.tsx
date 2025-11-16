@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, User, HandCoins, Clock, X, Send } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, MessageCircle, HandCoins, History, X, Send } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
 import { NavBar } from '@/app/components/navbar';
 import { UserDropdown } from '@/app/icondrop/UserDropdown'
@@ -263,7 +263,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Chat Button */}
                 {!isOpen && (
                     <button
@@ -285,15 +285,18 @@ export default function Home() {
                     >
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b" style={{ backgroundColor: "#e35540" }}>
-                            <div className="flex gap-5 items-center">
-                            <Clock className="text-white hover:cursor-pointer"/>
+                            <div className="flex gap-3 items-center">
+                            <MessageCircle className="text-white h-5 w-auto"/>
                             <h3 className="text-lg font-bold text-white">Chat</h3></div>
+                            <div className="flex gap-3">
+                            <History className="text-white hover:cursor-pointer h-5 w-auto"/>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="text-white hover:text-gray-200 transition-colors"
                             >
                                 <X size={20} className="hover:cursor-pointer" />
                             </button>
+                            </div>
                         </div>
 
                         {/* Messages Area */}
@@ -327,7 +330,7 @@ export default function Home() {
                         </div>
                     </div>
                 )}
-            </div>
+                </div>
         </div>
     )
 }
