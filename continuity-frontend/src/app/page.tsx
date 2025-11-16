@@ -12,7 +12,7 @@ export default function Home() {
       <div className="h-full flex flex-col mx-auto page-transition justify-center items-center">
         <Image className="w-auto h-[125px]" src={logo} alt="logo"/>
         <div className="flex flex-col mx-auto justify-center items-center">   
-          <h1 className="text-white text-center font-bold text-5xl p-5" >WELCOME BACK</h1>
+          <h1 className="text-white text-center font-bold text-5xl p-5" >WELCOME BACK hello</h1>
           <input className="text-white mt-10 w-[30vw] min-w-[400px] mb-5 h-12 text-sm border border-white rounded-sm p-5 transition-transform duration-300 focus:ring-0 focus:ring-offset-0 focus:outline-none" placeholder="Username"></input>
           <input className="text-white h-12 w-[30vw] min-w-[400px] border border-white text-sm rounded-sm p-5 transition-transform duration-300 focus:ring-0 focus:ring-offset-0 focus:outline-none" placeholder="Password" type="Username"></input>
         </div>
