@@ -40,21 +40,6 @@ export default function Home() {
         }
     };
 
-    const [documents] = useState([
-        { id: 1, name: 'Q3 Report.pdf', date: '2025-11-08' },
-        { id: 2, name: 'Contract_2025.docx', date: '2025-11-07' },
-        { id: 3, name: 'Budget_Plan.xlsx', date: '2025-11-05' },
-        { id: 4, name: 'Meeting_Notes.pdf', date: '2025-11-03' },
-        { id: 5, name: 'Project_Proposal.docx', date: '2025-11-01' },
-        { id: 6, name: 'Invoice_1234.pdf', date: '2025-10-30' },
-        { id: 7, name: 'Q3 Report.pdf', date: '2025-11-08' },
-        { id: 8, name: 'Contract_2025.docx', date: '2025-11-07' },
-        { id: 9, name: 'Budget_Plan.xlsx', date: '2025-11-05' },
-        { id: 10, name: 'Meeting_Notes.pdf', date: '2025-11-03' },
-        { id: 11, name: 'Project_Proposal.docx', date: '2025-11-01' },
-        { id: 12, name: 'Invoice_1234.pdf', date: '2025-10-30' },
-    ]);
-
     const [chatMessages, setChatMessages] = useState('');
     const [showHistory, setShowHistory] = useState(false);
     
@@ -70,13 +55,30 @@ export default function Home() {
         ? 'Chat History' : 'Start a conversation');
     };
 
+    const [documents] = useState([
+        { id: 1, name: 'Q3 Report.pdf', date: '2025-11-08' },
+        { id: 2, name: 'Contract_2025.docx', date: '2025-11-07' },
+        { id: 3, name: 'Budget_Plan.xlsx', date: '2025-11-05' },
+        { id: 4, name: 'Meeting_Notes.pdf', date: '2025-11-03' },
+        { id: 5, name: 'Project_Proposal.docx', date: '2025-11-01' },
+        { id: 6, name: 'Invoice_1234.pdf', date: '2025-10-30' },
+        { id: 7, name: 'Q3 Report.pdf', date: '2025-11-08' },
+        { id: 8, name: 'Contract_2025.docx', date: '2025-11-07' },
+        { id: 9, name: 'Budget_Plan.xlsx', date: '2025-11-05' },
+        { id: 10, name: 'Meeting_Notes.pdf', date: '2025-11-03' },
+        { id: 11, name: 'Project_Proposal.docx', date: '2025-11-01' },
+        { id: 12, name: 'Invoice_1234.pdf', date: '2025-10-30' },
+    ]);
+
+
+
     return (
         <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
             <div className="flex h-screen">
                 <div className="flex-1 w-full overflow-y-auto">
-                    <div className="flex items-center p-2 gap-4 border-b-[0.5] h-15">
-                        <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
                         <div className="flex text-gray-700 w-full justify-between items-center gap-5">
+                        <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
+                        <div className="flex w-full justify-between items-center gap-5">
                             <div className="flex gap-5">
                                 <Link href="/calendar" className="hover:text-gray-600 transition-colors cursor-pointer">
                                     Calendar
@@ -184,27 +186,47 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="h-[420px] min-w-[400px] bg-white mb-5 p-8 text-white round flex flex-col">
-                                <h1 className="text-gray-900 text-2xl mb-4 font-bold flex-shrink-0">
-                                    Documents
-                                </h1>
-                                <div className="flex flex-col gap-3 overflow-y-auto flex-1 pr-2">
-                                    {documents.map((doc) => (
-                                        <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors h-fit">
-                                            <div className="flex items-start gap-2">
-                                                <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
-                                                <div className="w-full flex justify-between gap-2 min-w-0">
-                                                    <p className="text-gray-900 text-sm font-medium truncate cursor-pointer">{doc.name}</p>
-                                                    <div className="flex gap-2">
-                                                    <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
-                                                    <EllipsisVertical className="text-gray-500 cursor-pointer"/>
+
+
+                                <div className="h-[380px] min-w-[400px] bg-white mb-5 p-8 text-white round flex flex-col">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h1 className="text-gray-900 text-2xl font-bold">
+                                            Documents
+                                        </h1>
+                                        <label htmlFor="file-upload" className="bg-gray-200 hover:bg-gray-300 transition-colors px-4 py-2 flex items-center gap-2 text-gray-700 font-medium cursor-pointer">
+                                            <span className="text-xl">+</span>
+                                            Upload
+                                        </label>
+                                        <input
+                                            id="file-upload"
+                                            type="file"
+                                            className="hidden"
+                                            onChange={(e) => {
+                                                const files = e.target.files;
+                                                if (files && files.length > 0) {
+                                                    console.log('Selected file:', files[0]);
+                                                }
+                                            }}
+                                            accept=".pdf,.doc,.docx,.txt"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-3 overflow-y-auto flex-1 pr-2">
+                                        {documents.map((doc) => (
+                                            <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors h-fit">
+                                                <div className="flex items-start gap-2">
+                                                    <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
+                                                    <div className="w-full flex justify-between gap-2 min-w-0">
+                                                        <p className="text-gray-900 text-sm font-medium truncate cursor-pointer">{doc.name}</p>
+                                                        <div className="flex gap-2">
+                                                            <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
+                                                            <EllipsisVertical className="text-gray-500 cursor-pointer" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
 
                             <div className="h-[360px] min-w-[400px] bg-white mb-5 p-8 flex flex-col round">
                                 <h1 className="text-gray-900 text-2xl mb-5 font-bold flex-shrink-0">
@@ -293,61 +315,72 @@ export default function Home() {
                         </button>
                     )}
 
-                {/* Chat Window */}
-                {isOpen && (
-                    <div
-                        className="fixed bottom-6 right-6 bg-white shadow-2xl z-[9999] w-[450px] flex flex-col"
-                        style={{ height: "600px" }}
-                    >
-                        {/* Header */}
-                        <div className="flex items-center justify-between p-4 border-b" style={{ backgroundColor: "#e35540" }}>
-                            <div className="flex gap-3 items-center">
-                            <MessageCircle className="text-white h-5 w-auto"/>
-                            <h3 className="text-lg font-bold text-white">Chat</h3></div>
-                            <div className="flex gap-3">
-                            <History className="text-white hover:cursor-pointer h-5 w-auto"/>
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="text-white hover:text-gray-200 transition-colors"
-                            >
-                                <X size={20} className="hover:cursor-pointer" />
-                            </button>
+                    {/* Chat Window */}
+                    {isOpen && (
+                        <div
+                            className="fixed bottom-6 right-6 bg-white shadow-2xl z-[9999] w-[450px] flex flex-col"
+                            style={{ height: "600px" }}
+                        >
+                            {/* Header */}
+                            <div className="flex items-center justify-between p-4 border-b" style={{ backgroundColor: "#e35540" }}>
+                                <div className="flex gap-3 items-center">
+                                    <MessageCircle className="text-white h-5 w-auto" />
+                                    <h3 className="text-lg font-bold text-white">Chat</h3></div>
+                                <div className="flex gap-3">
+                            <button onClick={historyclick}>                            
+                                <History className="text-white hover:cursor-pointer h-5 w-auto"/>
+                            </button>                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="text-white hover:text-gray-200 transition-colors"
+                                    >
+                                        <X size={20} className="hover:cursor-pointer" />
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-                            <div className="text-gray-500 text-sm text-center">
-                                Start a conversation
+                        <div className="text-gray-700 flex-1 p-4 overflow-y-auto bg-gray-50">
+                            <p className="text-gray-500 text-sm text-center">
+                                {chattype}
+                            </p>
+                            <div>
+                            {chattype === 'Chat History' && (
+                                <div className="mt-4 space-y-3">
+                                        <div className="p-3 bg-white border border-gray-200 rounded hover:bg-gray-100 transition-colors">
+                                            <p className="text-gray-900 font-semibold">Title</p>
+                                            <p className="text-gray-600 text-sm mt-1">Time</p>
+                                        </div>
+                                </div>
+                            )}
                             </div>
                         </div>
 
-
-                        {/* Input Area */}
-                        <div className="p-4 border-t bg-white">
-                            <div className="flex gap-2">
-                                <input
-                                    type="text"
-                                    value={message}
-                                    onChange={(e) => setMessage(e.target.value)}
-                                    placeholder="Type a message..."
-                                    className="flex-1 px-3 py-2 border focus:outline-none focus:ring-2 text-gray-800"
-                                    style={{ outlineColor: "#e35540" }}
-                                />
-                                <button
-                                    className="text-white p-2 transition-colors hover:cursor-pointer"
-                                    style={{ backgroundColor: "#e35540" }}
-                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#8e3123ff"}
-                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#e35540"}
-                                >
-                                    <Send size={20} />
-                                </button>
+                            {/* Input Area */}
+                            <div className="p-4 border-t bg-white">
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        placeholder="Type a message..."
+                                        className="flex-1 px-3 py-2 border focus:outline-none focus:ring-2 text-gray-800"
+                                        style={{ outlineColor: "#e35540" }}
+                                    />
+                                    <button
+                                        className="text-white p-2 transition-colors hover:cursor-pointer"
+                                        style={{ backgroundColor: "#e35540" }}
+                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#8e3123ff"}
+                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#e35540"}
+                                    >
+                                        <Send size={20} />
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 </div>
             </div>
             )
         </div>
-    )}
+    )
+}
