@@ -78,18 +78,18 @@ export default function Home() {
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
                         <div className="flex text-gray-700 w-full justify-between items-center gap-5">
                             <div className="flex gap-5">
-                            <Link href="/calendar" className="hover:text-gray-600 transition-colors cursor-pointer">
-                                Calendar
-                            </Link>
-                            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
-                                <p>HubSpot</p>
-                            </a>
-                            <p>Resources</p>
+                                <Link href="/calendar" className="hover:text-gray-600 transition-colors cursor-pointer">
+                                    Calendar
+                                </Link>
+                                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
+                                    <p>HubSpot</p>
+                                </a>
+                                <p>Resources</p>
                             </div>
                             <div className="flex items-center gap-3">
-                            <div className="text-right"><p><b>Show Media</b></p>
-                            <p className='text-xs'>showmedia@gmail.com</p></div>
-                            <UserDropdown />
+                                <div className="text-right"><p><b>Show Media</b></p>
+                                    <p className='text-xs'>showmedia@gmail.com</p></div>
+                                <UserDropdown />
                             </div>
                         </div>
                     </div>
@@ -195,10 +195,10 @@ export default function Home() {
                                                 <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
                                                 <div className="w-full flex justify-between gap-2 min-w-0">
                                                     <p className="text-gray-900 text-sm font-medium truncate cursor-pointer">{doc.name}</p>
-                                                        <div className="flex gap-2">
-                                                        <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
-                                                        <EllipsisVertical className="text-gray-500 cursor-pointer"/>
-                                                        </div>
+                                                    <div className="flex gap-2">
+                                                    <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
+                                                    <EllipsisVertical className="text-gray-500 cursor-pointer"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,20 +279,19 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Chat Button */}
-                {!isOpen && (
-                    <button
-                        onClick={() => setIsOpen(true)}
-                        className="fixed bottom-6 right-6 text-white p-4 rounded-full transition-all z-[9999] ease-in-out hover:scale-[1.04] hover:cursor-pointer"
-                        style={{ backgroundColor: "#ea4b33" }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#b34836"}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#ea4b33"}
-                    >
-                        <MessageSquare size={24} />
-                    </button>
-                )}
+                    {/* Chat Button */}
+                    {!isOpen && (
+                        <button
+                            onClick={() => setIsOpen(true)}
+                            className="fixed bottom-6 right-6 text-white p-4 rounded-full transition-all z-[9999] ease-in-out hover:scale-[1.04] hover:cursor-pointer"
+                            style={{ backgroundColor: "#ea4b33" }}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#b34836"}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#ea4b33"}
+                        >
+                            <MessageSquare size={24} />
+                        </button>
+                    )}
 
                 {/* Chat Window */}
                 {isOpen && (
@@ -306,9 +305,7 @@ export default function Home() {
                             <MessageCircle className="text-white h-5 w-auto"/>
                             <h3 className="text-lg font-bold text-white">Chat</h3></div>
                             <div className="flex gap-3">
-                            <button onClick={historyclick}>                            
-                                <History className="text-white hover:cursor-pointer h-5 w-auto"/>
-                            </button>
+                            <History className="text-white hover:cursor-pointer h-5 w-auto"/>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="text-white hover:text-gray-200 transition-colors"
@@ -319,19 +316,9 @@ export default function Home() {
                         </div>
 
                         {/* Messages Area */}
-                        <div className="text-gray-700 flex-1 p-4 overflow-y-auto bg-gray-50">
-                            <p className="text-gray-500 text-sm text-center">
-                                {chattype}
-                            </p>
-                            <div>
-                            {chattype === 'Chat History' && (
-                                <div className="mt-4 space-y-3">
-                                        <div className="p-3 bg-white border border-gray-200 rounded hover:bg-gray-100 transition-colors">
-                                            <p className="text-gray-900 font-semibold">Title</p>
-                                            <p className="text-gray-600 text-sm mt-1">Time</p>
-                                        </div>
-                                </div>
-                            )}
+                        <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
+                            <div className="text-gray-500 text-sm text-center">
+                                Start a conversation
                             </div>
                         </div>
 
@@ -359,8 +346,8 @@ export default function Home() {
                         </div>
                     </div>
                 )}
-                
-                
                 </div>
+            </div>
+            )
         </div>
     )}
