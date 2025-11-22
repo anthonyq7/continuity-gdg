@@ -76,7 +76,7 @@ export default function Home() {
         <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
             <div className="flex h-screen">
                 <div className="flex-1 w-full overflow-y-auto">
-                        <div className="flex text-gray-700 w-full justify-between items-center gap-5">
+                        <div className="flex border-b border-gray-300 text-gray-700 w-full justify-between items-center gap-5 p-2">
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
                         <div className="flex w-full justify-between items-center gap-5">
                             <div className="flex gap-5">
@@ -318,7 +318,7 @@ export default function Home() {
                     {/* Chat Window */}
                     {isOpen && (
                         <div
-                            className="fixed bottom-6 right-6 bg-white shadow-2xl z-[9999] w-[450px] flex flex-col"
+                            className="chatappear fixed bottom-6 right-6 bg-white shadow-2xl z-[9999] w-[450px] flex flex-col"
                             style={{ height: "600px" }}
                         >
                             {/* Header */}

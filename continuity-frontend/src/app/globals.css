@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #3f3f3f;
     --foreground: #ededed;
   }
 }
@@ -57,4 +57,17 @@ body {
 
 .roundsearch {
   border-radius: 0;
+}
+.chatappear {
+  animation: appearUp 0.3s ease-in-out;
+}
+@keyframes appearUp{
+  from{
+  opacity: 0.5;
+  transform: translateY(50px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
