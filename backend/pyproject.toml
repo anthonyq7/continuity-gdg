@@ -6,13 +6,17 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.117.1",
-    "pydantic>=2.11.9",
+    "pydantic[email]>=2.11.9",
+    "uvicorn[standard]>=0.24.0",
+    "python-dotenv>=1.0.0",
+    "supabase>=2.3.0",
 ]
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "ruff>=0.6",
     "pytest>=8",
+    "requests>=2.31.0",
 ]
 
 [tool.pytest.ini_options]
