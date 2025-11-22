@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, MessageCircle, EllipsisVertical, History, X, Send } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
-import { NavBar } from '@/app/components/navbar';
+import { historyProps } from '@/app/components/historycards';
 import { UserDropdown } from '@/app/icondrop/UserDropdown'
 
 
@@ -55,7 +55,20 @@ export default function Home() {
         { id: 12, name: 'Invoice_1234.pdf', date: '2025-10-30' },
     ]);
 
+    const [chatMessages, setChatMessages] = useState('');
+    const [showHistory, setShowHistory] = useState(false);
+    
+    const chatHistory = [
+        { id: 1, date: '2025-11-20', preview: 'How can I reset my password?' },
+        { id: 2, date: '2025-11-19', preview: 'What are your business hours?' },
+    ];
 
+    const [chattype, setChattype] = useState<string>('Start a conversation');
+    const historyclick = () => {
+        setChattype(prevText =>
+        prevText === 'Start a conversation' 
+        ? 'Chat History' : 'Start a conversation');
+    };
 
     return (
         <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
@@ -63,7 +76,7 @@ export default function Home() {
                 <div className="flex-1 w-full overflow-y-auto">
                     <div className="flex items-center p-2 gap-4 border-b-[0.5] h-15">
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
-                        <div className="flex w-full justify-between items-center gap-5">
+                        <div className="flex text-gray-700 w-full justify-between items-center gap-5">
                             <div className="flex gap-5">
                             <Link href="/calendar" className="hover:text-gray-600 transition-colors cursor-pointer">
                                 Calendar
@@ -182,10 +195,10 @@ export default function Home() {
                                                 <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
                                                 <div className="w-full flex justify-between gap-2 min-w-0">
                                                     <p className="text-gray-900 text-sm font-medium truncate cursor-pointer">{doc.name}</p>
-                                                    <div className="flex gap-2">
-                                                    <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
-                                                    <EllipsisVertical className="text-gray-500 cursor-pointer"/>
-                                                    </div>
+                                                        <div className="flex gap-2">
+                                                        <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
+                                                        <EllipsisVertical className="text-gray-500 cursor-pointer"/>
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -293,7 +306,9 @@ export default function Home() {
                             <MessageCircle className="text-white h-5 w-auto"/>
                             <h3 className="text-lg font-bold text-white">Chat</h3></div>
                             <div className="flex gap-3">
-                            <History className="text-white hover:cursor-pointer h-5 w-auto"/>
+                            <button onClick={historyclick}>                            
+                                <History className="text-white hover:cursor-pointer h-5 w-auto"/>
+                            </button>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="text-white hover:text-gray-200 transition-colors"
@@ -304,9 +319,19 @@ export default function Home() {
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-                            <div className="text-gray-500 text-sm text-center">
-                                Start a conversation
+                        <div className="text-gray-700 flex-1 p-4 overflow-y-auto bg-gray-50">
+                            <p className="text-gray-500 text-sm text-center">
+                                {chattype}
+                            </p>
+                            <div>
+                            {chattype === 'Chat History' && (
+                                <div className="mt-4 space-y-3">
+                                        <div className="p-3 bg-white border border-gray-200 rounded hover:bg-gray-100 transition-colors">
+                                            <p className="text-gray-900 font-semibold">Title</p>
+                                            <p className="text-gray-600 text-sm mt-1">Time</p>
+                                        </div>
+                                </div>
+                            )}
                             </div>
                         </div>
 
@@ -334,7 +359,8 @@ export default function Home() {
                         </div>
                     </div>
                 )}
+                
+                
                 </div>
         </div>
-    )
-}
+    )}
