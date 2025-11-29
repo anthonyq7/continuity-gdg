@@ -76,7 +76,7 @@ export default function Home() {
         <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
             <div className="flex h-screen">
                 <div className="flex-1 w-full overflow-y-auto">
-                        <div className="flex border-b border-gray-300 text-gray-700 w-full justify-between items-center gap-5 p-2">
+                    <div className="flex border-b border-gray-300 text-gray-700 w-full justify-between items-center gap-5 p-2">
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
                         <div className="flex w-full justify-between items-center gap-5">
                             <div className="flex gap-5">
@@ -95,8 +95,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-1 p-4 appear flex-wrap transition-all duration-500 ease-in-out gap-2 pt-6" style={{ backgroundColor: "#fafafaff" }}>
-                        <div className="text-black px-2 min-w-[400px] flex-1">
+                    <div className="flex flex-1 p-4 flex-wrap transition-all duration-500 ease-in-out gap-2 pt-6" style={{ backgroundColor: "#fafafaff" }}>
+                        <div className="text-black appear px-2 min-w-[400px] flex-1">
                             <div className="min-w-[350] round mb-5 p-6 text-white transition-all duration-300 flex-shrink-0" style={{ backgroundColor: "#e35540" }}>
                                 <h1 className="text-white font-bold text-4xl mb-2">MY DASHBOARD</h1>
                                 <p className="text-md text-white">Manage all activities here</p>
@@ -157,7 +157,7 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="text-black px-2 min-w-[400px] flex-1">
+                        <div className="appear text-black px-2 min-w-[400px] flex-1">
                             <div className="h-[185px] min-w-[400px] bg-white mb-5 p-8 text-white round">
                                 <h1 className="text-gray-900 text-2xl mb-3 font-bold">
                                     Progress Check

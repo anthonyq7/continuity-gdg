@@ -65,10 +65,10 @@ export default function Home() {
                         'July', 'August', 'September', 'October', 'November', 'December'];
 
     return (
-        <div className="h-screen w-screen" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
+        <div className="h-screen w-screen text-gray-900" style={{ backgroundColor: "#ffffffff", fontFamily: "'Montserrat', sans-serif" }}>
             <div className="flex h-screen">
                 <div className="flex-1 w-full overflow-y-auto">
-                    <div className="flex items-center p-2 justify-between gap-4 border-b-[0.5] h-15">
+                    <div className="flex border-b border-gray-300 text-gray-700 w-full justify-between items-center gap-5 p-2">
                         <div className="flex"><Image src={smslogo} alt="logo" className="w-40 h-auto" /></div>
                                        <div className="flex w-full justify-between items-center gap-5">
                             <div className="flex gap-5">

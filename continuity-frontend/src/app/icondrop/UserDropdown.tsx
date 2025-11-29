@@ -31,17 +31,17 @@ export function UserDropdown() {
 
       {isOpen && (
         <div className="absolute right-0 mt-12 text-gray-500 w-50 bg-white shadow-lg z-10 border border-gray-200">
+            <Link href="/" 
+            className="flex items-center gap-3 hover:bg-[#e8bbb4] p-4 duration-300"
+            onClick={() => setIsOpen(false)}>
+            <Settings className="w-5 h-5"/>
+            <span>Settings</span>
+          </Link>
           <Link href="/" 
             className="flex items-center gap-3 hover:bg-[#e8bbb4] p-4 duration-300"
             onClick={() => setIsOpen(false)}>
             <LogOut className="w-5 h-5"/>
             <span>Sign Out</span>
-          </Link>
-          <Link href="/" 
-            className="flex items-center gap-3 hover:bg-[#e8bbb4] p-4 duration-300"
-            onClick={() => setIsOpen(false)}>
-            <Settings className="w-5 h-5"/>
-            <span>Settings</span>
           </Link>
         </div>
       )}
