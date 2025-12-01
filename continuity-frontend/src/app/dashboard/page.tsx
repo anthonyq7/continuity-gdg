@@ -2,11 +2,16 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, MessageCircle, EllipsisVertical, History, X, Send } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search, Bell, MessageCircle, EllipsisVertical, History, X, Send, Trash2 } from 'lucide-react';
 import smslogo from "@/assets/widelogo.png";
 import { historyProps } from '@/app/components/historycards';
 import { UserDropdown } from '@/app/icondrop/UserDropdown'
 
+interface Document {
+    id: number;
+    name: string;
+    date: string;
+}
 
 export default function Home() {
     const [activeItem, setActiveItem] = useState('Overview');
@@ -54,22 +59,29 @@ export default function Home() {
         prevText === 'Start a conversation' 
         ? 'Chat History' : 'Start a conversation');
     };
+    
+    const [documents, setDocuments] = useState<Document[]>([]);
+    const [showMenu, setShowMenu] = useState<number | null>(null);
 
-    const [documents] = useState([
-        { id: 1, name: 'Q3 Report.pdf', date: '2025-11-08' },
-        { id: 2, name: 'Contract_2025.docx', date: '2025-11-07' },
-        { id: 3, name: 'Budget_Plan.xlsx', date: '2025-11-05' },
-        { id: 4, name: 'Meeting_Notes.pdf', date: '2025-11-03' },
-        { id: 5, name: 'Project_Proposal.docx', date: '2025-11-01' },
-        { id: 6, name: 'Invoice_1234.pdf', date: '2025-10-30' },
-        { id: 7, name: 'Q3 Report.pdf', date: '2025-11-08' },
-        { id: 8, name: 'Contract_2025.docx', date: '2025-11-07' },
-        { id: 9, name: 'Budget_Plan.xlsx', date: '2025-11-05' },
-        { id: 10, name: 'Meeting_Notes.pdf', date: '2025-11-03' },
-        { id: 11, name: 'Project_Proposal.docx', date: '2025-11-01' },
-        { id: 12, name: 'Invoice_1234.pdf', date: '2025-10-30' },
-    ]);
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const today = new Date();
+            const localDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            const newDoc: Document = {
+                id: Date.now(),
+                name: files[0].name,
+                date: localDate
+            };
+            setDocuments([newDoc, ...documents]);
+        }
+        e.target.value = '';
+    };
 
+    const handleDelete = (id: number) => {
+        setDocuments(documents.filter(doc => doc.id !== id));
+        setShowMenu(null);
+    };
 
 
     return (
@@ -83,7 +95,7 @@ export default function Home() {
                                 <Link href="/calendar" className="hover:text-gray-600 transition-colors cursor-pointer">
                                     Calendar
                                 </Link>
-                                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
+                                <a href="https://app.hubspot.com/login?hubs_signup-url=www.hubspot.com%2Fproducts%2Fdata&hubs_signup-cta=nav-utility-login&hubs_content=www.hubspot.com%2Fproducts%2Fdata&hubs_content-cta=nav-utility-login&uuid=anon2907328735ba182f3362a12b0f4c" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
                                     <p>HubSpot</p>
                                 </a>
                                 <p>Resources</p>
@@ -190,42 +202,53 @@ export default function Home() {
 
                                 <div className="h-[380px] min-w-[400px] bg-white mb-5 p-8 text-white round flex flex-col">
                                     <div className="flex items-center justify-between mb-4">
-                                        <h1 className="text-gray-900 text-2xl font-bold">
-                                            Documents
-                                        </h1>
+                                        <h1 className="text-gray-900 text-2xl font-bold">Documents</h1>
                                         <label htmlFor="file-upload" className="bg-gray-200 hover:bg-gray-300 transition-colors px-4 py-2 flex items-center gap-2 text-gray-700 font-medium cursor-pointer">
                                             <span className="text-xl">+</span>
-                                            Upload
-                                        </label>
+                                            Upload</label>
                                         <input
-                                            id="file-upload"
-                                            type="file"
-                                            className="hidden"
-                                            onChange={(e) => {
-                                                const files = e.target.files;
-                                                if (files && files.length > 0) {
-                                                    console.log('Selected file:', files[0]);
-                                                }
-                                            }}
-                                            accept=".pdf,.doc,.docx,.txt"
-                                        />
+                                                id="file-upload"
+                                                type="file"
+                                                className="hidden"
+                                                onChange={handleFileUpload}
+                                                accept=".pdf,.doc,.docx,.txt,.xlsx,.xls"/>
                                     </div>
+                                    {documents.length === 0 ? (
+                                    <div className="flex-1 flex items-center justify-center text-center">
+                                            <div>
+                                                <FileText size={48} className="text-gray-300 mx-auto mb-4" />
+                                                <p className="text-gray-500 text-lg mb-2">No documents yet</p>
+                                                <p className="text-gray-400 text-sm">Click the Upload button to add document files</p>
+                                            </div>
+                                    </div>
+                                    ) : (
                                     <div className="flex flex-col gap-3 overflow-y-auto flex-1 pr-2">
                                         {documents.map((doc) => (
-                                            <div key={doc.id} className="bg-gray-50 p-3 hover:bg-gray-100 transition-colors h-fit">
-                                                <div className="flex items-start gap-2">
-                                                    <FileText size={16} className="text-gray-600 mt-1 flex-shrink-0" />
-                                                    <div className="w-full flex justify-between gap-2 min-w-0">
-                                                        <p className="text-gray-900 text-sm font-medium truncate cursor-pointer">{doc.name}</p>
-                                                        <div className="flex gap-2">
-                                                            <p className="text-gray-500 text-xs mt-1">{doc.date}</p>
-                                                            <EllipsisVertical className="text-gray-500 cursor-pointer" />
+                                            <div key={doc.id} className="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors flex items-start gap-3">
+                                                <FileText size={20} className="text-gray-600 mt-1 flex-shrink-0" />
+                                                <p className="text-gray-900 text-sm font-medium truncate flex-1">{doc.name}</p>
+                                                <p className="text-gray-500 text-xs whitespace-nowrap">{doc.date}</p>
+                                                <div className="relative">
+                                                    <EllipsisVertical 
+                                                        size={18}
+                                                        className="text-gray-500 cursor-pointer hover:text-gray-700" 
+                                                        onClick={() => setShowMenu(showMenu === doc.id ? null : doc.id)}
+                                                    />
+                                                    {showMenu === doc.id && (
+                                                        <div className="absolute right-0 mt-1 bg-white border border-gray-200 hover:bg-red-50 shadow-lg py-1 z-10 min-w-[100px]">
+                                                            <button
+                                                                onClick={() => handleDelete(doc.id)}
+                                                                className="w-full px-4 py-2 text-left text-xs text-red-600 flex items-center gap-2 cursor-pointer"
+                                                            >
+                                                                <Trash2 size={14} />
+                                                                Delete
+                                                            </button>
                                                         </div>
-                                                    </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         ))}
-                                    </div>
+                                    </div>)}
                                 </div>
 
                             <div className="h-[360px] min-w-[400px] bg-white mb-5 p-8 flex flex-col round">

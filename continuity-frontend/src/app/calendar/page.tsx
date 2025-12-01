@@ -75,7 +75,7 @@ export default function Home() {
                             <Link href="/dashboard" className="hover:text-gray-600 transition-colors cursor-pointer">
                                 Dashboard
                             </Link>
-                            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
+                            <a href="https://app.hubspot.com/login?hubs_signup-url=www.hubspot.com%2Fproducts%2Fdata&hubs_signup-cta=nav-utility-login&hubs_content=www.hubspot.com%2Fproducts%2Fdata&hubs_content-cta=nav-utility-login&uuid=anon2907328735ba182f3362a12b0f4c" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors cursor-pointer">
                                 <p>HubSpot</p>
                             </a>
                             <p>Resources</p>
