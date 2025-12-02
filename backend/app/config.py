@@ -1,4 +1,5 @@
 """Configuration and environment variables"""
+
 import os
 from dotenv import load_dotenv
 
@@ -13,4 +14,3 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
 # N8N webhook configuration
 N8N_CHAT_WEBHOOK_URL = os.getenv("N8N_CHAT_WEBHOOK_URL")
-

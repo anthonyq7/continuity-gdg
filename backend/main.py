@@ -2,6 +2,7 @@
 Legacy main.py - kept for backward compatibility
 This file now imports from the restructured app module.
 """
+
 from app.main import app
 import uvicorn
 

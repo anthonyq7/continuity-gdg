@@ -1,4 +1,5 @@
 """Dependencies for FastAPI routes"""
+
 from fastapi import HTTPException, Header
 from typing import Optional
 from supabase import Client
@@ -8,6 +9,7 @@ from supabase import create_client
 # Initialize Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+
 # Auth dependency (required)
 async def get_current_user(authorization: Optional[str] = Header(None)):
     """
@@ -16,7 +18,7 @@ async def get_current_user(authorization: Optional[str] = Header(None)):
     """
     if not authorization:
         raise HTTPException(status_code=401, detail="No token provided")
-    
+
     try:
         token = authorization.replace("Bearer ", "")
         user = supabase.auth.get_user(token)
@@ -26,6 +28,7 @@ async def get_current_user(authorization: Optional[str] = Header(None)):
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")
 
+
 # Optional auth dependency (returns None if no auth)
 async def get_optional_user(authorization: Optional[str] = Header(None)):
     """
@@ -34,7 +37,7 @@ async def get_optional_user(authorization: Optional[str] = Header(None)):
     """
     if not authorization:
         return None
-    
+
     try:
         token = authorization.replace("Bearer ", "")
         user = supabase.auth.get_user(token)
@@ -42,6 +45,5 @@ async def get_optional_user(authorization: Optional[str] = Header(None)):
             return user.user
     except Exception:
         pass
-    
-    return None
 
+    return None
