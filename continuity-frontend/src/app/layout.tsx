@@ -30,7 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head><link href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet"></link></head>
+      <head>
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" 
+          rel="stylesheet"
+          crossOrigin="anonymous"
+          suppressHydrationWarning
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

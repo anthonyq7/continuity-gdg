@@ -18,6 +18,7 @@ interface Document {
 export default function Home() {
     const [activeItem, setActiveItem] = useState('Overview');
     const [isOpen, setIsOpen] = useState(false);
+    const [hasOpenedChat, setHasOpenedChat] = useState(false);
     const [message, setMessage] = useState('');
     const navItems = [
         { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -315,7 +316,10 @@ export default function Home() {
                     {/* Chat Button */}
                     {!isOpen && (
                         <button
-                            onClick={() => setIsOpen(true)}
+                            onClick={() => {
+                                setIsOpen(true);
+                                setHasOpenedChat(true);
+                            }}
                             className="fixed bottom-6 right-6 text-white p-4 rounded-full transition-all z-[9999] ease-in-out hover:scale-[1.04] hover:cursor-pointer"
                             style={{ backgroundColor: "#ea4b33" }}
                             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#b34836"}
@@ -325,9 +329,11 @@ export default function Home() {
                         </button>
                     )}
 
-                    {/* Chat Window */}
-                    {isOpen && (
-                        <ChatInterface onClose={() => setIsOpen(false)} />
+                    {/* Chat Window - Mount once opened, then persist to keep messages */}
+                    {hasOpenedChat && (
+                        <div style={{ display: isOpen ? 'block' : 'none' }}>
+                            <ChatInterface onClose={() => setIsOpen(false)} />
+                        </div>
                     )}
                 </div>
             </div>
