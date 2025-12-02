@@ -12,8 +12,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [chattype, setChattype] = useState<string>('Start a conversation');
+  const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Fetch message history on component mount
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isLoading]);
+
+  // Fetch message history on component mount using GET request
   useEffect(() => {
     loadMessageHistory();
   }, []);
@@ -21,6 +27,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
   const loadMessageHistory = async () => {
     try {
       const history = await chatService.fetchMessageHistory();
+      // Backend already returns the newest 20 messages
       setMessages(history);
     } catch (error) {
       console.error('Failed to load message history:', error);
@@ -35,10 +42,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
     );
   };
 
+  // On click, update the value of query
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
+  // On Enter, submit HTTP POST request to backend
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && query.trim() !== '') {
       submitQuery();
@@ -53,8 +62,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
     setQuery(''); // Clear input immediately
 
     try {
+      // POST request to backend with the query
       const data = await chatService.sendQuery(currentQuery);
 
+      // Create ChatItem object with both query and response
       const newMessage: Message = {
         id: data.id || Date.now().toString(),
         query: currentQuery,
@@ -62,7 +73,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
         timestamp: new Date(),
       };
 
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      // Update the messages array (queue structure)
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, newMessage];
+        
+        // If length > 20, pop the first (oldest) message
+        if (updatedMessages.length > 20) {
+          return updatedMessages.slice(1); // Remove first element, keep last 20
+        }
+        
+        return updatedMessages;
+      });
+
+      // State updates and chat refreshes automatically with new query and response
     } catch (error) {
       console.error('Error submitting query:', error);
       
@@ -72,7 +95,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
         response: 'Error: Failed to get response from server',
         timestamp: new Date(),
       };
-      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+      
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, errorMessage];
+        if (updatedMessages.length > 20) {
+          return updatedMessages.slice(1);
+        }
+        return updatedMessages;
+      });
     } finally {
       setIsLoading(false);
     }
@@ -102,7 +132,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Messages Area */}
+      {/* Messages Area - Chat refreshes with new query and response */}
       <div className="text-gray-700 flex-1 p-4 overflow-y-auto bg-gray-50">
         {messages.length === 0 && !isLoading && (
           <p className="text-gray-500 text-sm text-center">
@@ -112,14 +142,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
 
         {chattype === 'Start a conversation' && (
           <div className="space-y-4">
+            {/* Display messages array - each message is either human or AI */}
             {messages.map((message) => (
-              <div key={message.id} className="space-y-2">
-                <div className="bg-blue-100 p-3 rounded-lg ml-auto max-w-[80%]">
-                  <p className="text-gray-900 text-sm">{message.query}</p>
-                </div>
-                <div className="bg-white p-3 rounded-lg mr-auto max-w-[80%] border border-gray-200">
-                  <p className="text-gray-900 text-sm">{message.response}</p>
-                </div>
+              <div key={message.id}>
+                {/* Show human message if it has query */}
+                {message.query && (
+                  <div className="bg-orange-100 p-3 rounded-lg ml-auto max-w-[80%] mb-2">
+                    <p className="text-gray-900 text-sm">{message.query}</p>
+                  </div>
+                )}
+                {/* Show AI message if it has response */}
+                {message.response && (
+                  <div className="bg-white p-3 rounded-lg mr-auto max-w-[80%] border border-gray-200">
+                    <p className="text-gray-900 text-sm">{message.response}</p>
+                  </div>
+                )}
               </div>
             ))}
             {isLoading && (
@@ -127,13 +164,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
                 <p className="text-gray-600 text-sm">Typing...</p>
               </div>
             )}
+            {/* Invisible div to scroll to */}
+            <div ref={messagesEndRef} />
           </div>
         )}
 
         {chattype === 'Chat History' && (
           <div className="mt-4 space-y-3">
             {messages.map((message) => (
-              <div key={message.id} className="p-3 bg-white border border-gray-200 rounded hover:bg-gray-100 transition-colors cursor-pointer">
+              <div key={message.id} className="p-3 bg-white border border-gray-200 rounded hover:bg-gray-100 transition-colors">
                 <p className="text-gray-900 font-semibold truncate">{message.query}</p>
                 <p className="text-gray-600 text-sm mt-1">
                   {new Date(message.timestamp).toLocaleString()}
@@ -147,6 +186,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose }) => {
       {/* Input Area */}
       <div className="p-4 border-t bg-white">
         <div className="flex gap-2">
+          {/* Textbox with onClick attribute to update query value */}
           <input
             type="text"
             value={query}
