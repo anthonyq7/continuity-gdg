@@ -1,6 +1,6 @@
 """Dependencies for FastAPI routes"""
-from fastapi import HTTPException, Header, Request
-from typing import Optional, Any
+from fastapi import HTTPException, Header
+from typing import Optional
 from supabase import Client
 from app.config import SUPABASE_URL, SUPABASE_ANON_KEY
 from supabase import create_client

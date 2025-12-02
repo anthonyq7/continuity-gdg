@@ -5,7 +5,6 @@ Endpoints:
 - POST /api/chat - Send a message to the chatbot (works with or without authentication)
 - GET /api/chat/history - Get chat history (works with or without authentication)
 """
-import os
 from fastapi import APIRouter, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from typing import Optional, Any
