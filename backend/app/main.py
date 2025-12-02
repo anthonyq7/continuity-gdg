@@ -12,7 +12,7 @@ API Structure:
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import FRONTEND_URL
-from app.routers import auth, chat
+from app.routers import auth, chat, calendar
 
 # Create FastAPI app
 app = FastAPI(
@@ -31,6 +31,7 @@ app.add_middleware(
 # Include routers
 app.include_router(auth.router)
 app.include_router(chat.router)
+app.include_router(calendar.router)
 
 
 # Root endpoint

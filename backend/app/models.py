@@ -17,3 +17,8 @@ class LoginRequest(BaseModel):
 # Chat models
 class ChatRequest(BaseModel):
     message: str
+
+# Calendar models
+class CalendarEventsRequest(BaseModel):
+    year: int
+    month: int
