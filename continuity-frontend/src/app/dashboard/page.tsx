@@ -6,6 +6,8 @@ import { LayoutDashboard, FileText, Users, MessageSquare, MoreHorizontal, Search
 import smslogo from "@/assets/widelogo.png";
 import { historyProps } from '@/app/components/historycards';
 import { UserDropdown } from '@/app/icondrop/UserDropdown'
+import ChatInterface from '@/app/components/chatInterface';
+
 
 interface Document {
     id: number;
@@ -43,21 +45,6 @@ export default function Home() {
             case 'overdue': return 'text-red-600';
             default: return 'text-gray-600';
         }
-    };
-
-    const [chatMessages, setChatMessages] = useState('');
-    const [showHistory, setShowHistory] = useState(false);
-    
-    const chatHistory = [
-        { id: 1, date: '2025-11-20', preview: 'How can I reset my password?' },
-        { id: 2, date: '2025-11-19', preview: 'What are your business hours?' },
-    ];
-
-    const [chattype, setChattype] = useState<string>('Start a conversation');
-    const historyclick = () => {
-        setChattype(prevText =>
-        prevText === 'Start a conversation' 
-        ? 'Chat History' : 'Start a conversation');
     };
     
     const [documents, setDocuments] = useState<Document[]>([]);
@@ -340,70 +327,10 @@ export default function Home() {
 
                     {/* Chat Window */}
                     {isOpen && (
-                        <div
-                            className="chatappear fixed bottom-6 right-6 bg-white shadow-2xl z-[9999] w-[450px] flex flex-col"
-                            style={{ height: "600px" }}
-                        >
-                            {/* Header */}
-                            <div className="flex items-center justify-between p-4 border-b" style={{ backgroundColor: "#e35540" }}>
-                                <div className="flex gap-3 items-center">
-                                    <MessageCircle className="text-white h-5 w-auto" />
-                                    <h3 className="text-lg font-bold text-white">Chat</h3></div>
-                                <div className="flex gap-3">
-                            <button onClick={historyclick}>                            
-                                <History className="text-white hover:cursor-pointer h-5 w-auto"/>
-                            </button>                                    <button
-                                        onClick={() => setIsOpen(false)}
-                                        className="text-white hover:text-gray-200 transition-colors"
-                                    >
-                                        <X size={20} className="hover:cursor-pointer" />
-                                    </button>
-                                </div>
-                            </div>
-
-                        {/* Messages Area */}
-                        <div className="text-gray-700 flex-1 p-4 overflow-y-auto bg-gray-50">
-                            <p className="text-gray-500 text-sm text-center">
-                                {chattype}
-                            </p>
-                            <div>
-                            {chattype === 'Chat History' && (
-                                <div className="mt-4 space-y-3">
-                                        <div className="p-3 bg-white border border-gray-200 rounded hover:bg-gray-100 transition-colors">
-                                            <p className="text-gray-900 font-semibold">Title</p>
-                                            <p className="text-gray-600 text-sm mt-1">Time</p>
-                                        </div>
-                                </div>
-                            )}
-                            </div>
-                        </div>
-
-                            {/* Input Area */}
-                            <div className="p-4 border-t bg-white">
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        value={message}
-                                        onChange={(e) => setMessage(e.target.value)}
-                                        placeholder="Type a message..."
-                                        className="flex-1 px-3 py-2 border focus:outline-none focus:ring-2 text-gray-800"
-                                        style={{ outlineColor: "#e35540" }}
-                                    />
-                                    <button
-                                        className="text-white p-2 transition-colors hover:cursor-pointer"
-                                        style={{ backgroundColor: "#e35540" }}
-                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#8e3123ff"}
-                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#e35540"}
-                                    >
-                                        <Send size={20} />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <ChatInterface onClose={() => setIsOpen(false)} />
                     )}
                 </div>
             </div>
-            )
         </div>
     )
 }
