@@ -4,6 +4,7 @@ Chat endpoints
 Endpoints:
 - POST /api/chat - Send a message to the chatbot (works with or without authentication)
 - GET /api/chat/history - Get chat history (works with or without authentication)
+- GET /api/chat/recent - Get most recent 20 messages from all users
 """
 
 from fastapi import APIRouter, HTTPException, Depends, Request
@@ -83,9 +84,8 @@ async def get_chat_history(http_request: Request, user: Optional[Any] = Depends(
     - messages: Array of chat messages
 
     Each message contains:
-    - id: Message ID
-    - session_id: Session identifier
-    - message: Message object with type ("human" or "ai") and content
+    - type: Message type ("human" or "ai")
+    - content: Message content text
     """
     try:
         # Get session ID (from authenticated user or anonymous cookie)
@@ -98,3 +98,46 @@ async def get_chat_history(http_request: Request, user: Optional[Any] = Depends(
         return {"messages": response.data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Could not fetch history: {str(e)}")
+
+
+@router.get("/recent")
+async def get_recent_messages():
+    """
+    Get the most recent 20 chat messages from all users.
+
+    Returns the latest 20 messages across all sessions, ordered by ID descending.
+
+    Returns:
+    - messages: Array of the 20 most recent chat messages
+
+    Each message contains:
+    - message: Message content
+    - type: Message type ("human" or "ai")
+    - content: Message content text
+    """
+    try:
+        response = (
+            supabase.table("n8n_chat_histories")
+            .select("*")
+            .order("id", desc=True)
+            .limit(20)
+            .execute()
+        )
+
+        # Reverse to show oldest first (most recent at the end)
+        raw_messages = list(reversed(response.data))
+
+        # Transform to only include type and content
+        messages = []
+        for msg in raw_messages:
+            msg_data = msg.get("message", {})
+            messages.append(
+                {
+                    "type": msg_data.get("type", ""),
+                    "content": msg_data.get("content", ""),
+                }
+            )
+
+        return {"messages": messages}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Could not fetch recent messages: {str(e)}")

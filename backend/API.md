@@ -124,6 +124,29 @@ The API supports two modes:
     }
     ```
 
+#### Get Recent Messages (All Users)
+- **GET** `/api/chat/recent`
+  - **No authentication required**
+  - **Returns:** The most recent 20 messages from all users
+  - **Returns:**
+    ```json
+    {
+      "messages": [
+        {
+          "type": "human",
+          "content": "Message content..."
+        },
+        {
+          "type": "ai",
+          "content": "Response content..."
+        }
+      ]
+    }
+    ```
+  - **Note:** 
+    - Messages are ordered chronologically (oldest of the 20 most recent first)
+    - Each message only contains `type` ("human" or "ai") and `content` (message text)
+
 ## Frontend Integration Examples
 
 ### Anonymous Chat (No Authentication)
