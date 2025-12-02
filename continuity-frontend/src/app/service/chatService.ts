@@ -1,5 +1,3 @@
-// services/chatService.ts
-
 import { Message, ChatResponse, MessageHistoryResponse } from '@/app/types/chat';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'; // Your FastAPI backend URL
